@@ -14,13 +14,22 @@ use Santik\Tickets\Infrastructure\MicroDbBasedListingRepository;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
+/* set up */
 //using very simple json files based database
+//path must be writable
 $database = new Database(dirname(__FILE__) . '/../data/database');
 
 $userRepository = new MicroDbBasedUserRepository($database);
 $userService = new UserService($userRepository);
 
+$listingRepository = new MicroDbBasedListingRepository($database);
+$listingValidator = new ListingValidator($listingRepository);
+$listingService = new ListingService($listingRepository, $listingValidator);
+
+$converter = new JsonRequestListingConverter();
+
 $request = Request::createFromGlobals();
+/* end of set up */
 
 //simple authentication protection
 //if user is not found in database 403 is returned
@@ -31,15 +40,9 @@ try {
     $response->send();
     exit;
 }
-//at this point we have a 'logged in user'
 
-$listingRepository = new MicroDbBasedListingRepository($database);
-$listingValidator = new ListingValidator($listingRepository);
-$listingService = new ListingService($listingRepository, $listingValidator);
 
-//create request => domain listing converter
-$converter = new JsonRequestListingConverter();
-
+//here is 'real' application starts
 try {
     //convert and save listing with owner
     $newListing = $listingService->create($converter->convert($request), $user);
