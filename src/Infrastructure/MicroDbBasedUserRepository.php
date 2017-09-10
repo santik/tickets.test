@@ -1,12 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Santik\Tickets\Infrastructure;
 
 use MicroDB\Database;
 use Santik\Tickets\Domain\Repository\UserRepository;
 use Santik\Tickets\Domain\User;
 
-class MicroDbBasedUserRepository implements UserRepository
+final class MicroDbBasedUserRepository implements UserRepository
 {
     private $database;
 

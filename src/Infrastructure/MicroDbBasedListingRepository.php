@@ -10,7 +10,7 @@ use Santik\Tickets\Domain\Repository\ListingRepository;
 use Santik\Tickets\Domain\Ticket;
 use Santik\Tickets\Domain\User;
 
-class MicroDbBasedListingRepository implements ListingRepository
+final class MicroDbBasedListingRepository implements ListingRepository
 {
     private $database;
 

@@ -14,5 +14,5 @@ interface ListingRepository
     /**
      * @return Listing[]
      */
-    public function findAllListings(): array ;
+    public function findAllListings(): array;
 }

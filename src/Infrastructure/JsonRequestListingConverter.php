@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Santik\Tickets\Infrastructure;
 
 use Santik\Tickets\Application\ListingConverter;
@@ -8,7 +10,7 @@ use Santik\Tickets\Domain\Ticket;
 use Symfony\Component\HttpFoundation\Request;
 use Webmozart\Assert\Assert;
 
-class JsonRequestListingConverter implements ListingConverter
+final class JsonRequestListingConverter implements ListingConverter
 {
     /**
      * @param Request $data

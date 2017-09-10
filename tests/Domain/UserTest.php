@@ -6,7 +6,7 @@ namespace Santik\Tickets\Domain;
 
 use PHPUnit\Framework\TestCase;
 
-class UserTest extends TestCase
+final class UserTest extends TestCase
 {
     public function testCreateFromArray_WithCorrectParams_WillReturnTicket()
     {

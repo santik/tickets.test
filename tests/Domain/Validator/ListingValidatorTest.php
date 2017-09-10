@@ -12,7 +12,7 @@ use Santik\Tickets\Domain\Listing;
 use Santik\Tickets\Domain\Repository\ListingRepository;
 use Santik\Tickets\Domain\Ticket;
 
-class ListingValidatorTest extends TestCase
+final class ListingValidatorTest extends TestCase
 {
     public function testValidate_BarcodesAreNotUniqueInListing_WillThrowException()
     {

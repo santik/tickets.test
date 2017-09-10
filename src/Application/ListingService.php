@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Santik\Tickets\Application;
 
 use Santik\Tickets\Domain\Listing;
@@ -7,7 +9,7 @@ use Santik\Tickets\Domain\Repository\ListingRepository;
 use Santik\Tickets\Domain\User;
 use Santik\Tickets\Domain\Validator\ListingValidator;
 
-class ListingService
+final class ListingService
 {
     private $listingRepository;
 

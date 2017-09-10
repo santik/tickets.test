@@ -12,7 +12,7 @@ use Santik\Tickets\Domain\Ticket;
 use Santik\Tickets\Domain\User;
 use Santik\Tickets\Domain\Validator\ListingValidator;
 
-class ListingServiceTest extends TestCase
+final class ListingServiceTest extends TestCase
 {
     public function testCreate_withCorrectListing_WillReturnListingWithIds()
     {

@@ -1,14 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Santik\Tickets\Application;
 
 use Santik\Tickets\Domain\Repository\UserRepository;
 use Santik\Tickets\Domain\User;
 use Symfony\Component\HttpFoundation\Request;
 
-class UserService
+final class UserService
 {
-
     private $userRepository;
 
     public function __construct(UserRepository $userRepository)
@@ -16,7 +17,7 @@ class UserService
         $this->userRepository = $userRepository;
     }
 
-    public function findOrCreateUser($id)
+    public function findOrCreateUser($id): User
     {
         try {
             $user = $this->userRepository->findUser($id);

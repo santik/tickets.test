@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Santik\Tickets\Application;
@@ -9,7 +10,7 @@ use Santik\Tickets\Domain\Repository\UserRepository;
 use Santik\Tickets\Domain\User;
 use Symfony\Component\HttpFoundation\Request;
 
-class UserServiceTest extends TestCase
+final class UserServiceTest extends TestCase
 {
     public function testFindOrCreate_withExistingId_WillReturnUser()
     {

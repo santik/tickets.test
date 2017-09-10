@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Santik\Tickets\Infrastructure;
@@ -8,7 +9,7 @@ use Santik\Tickets\Domain\Listing;
 use Santik\Tickets\Domain\Ticket;
 use Symfony\Component\HttpFoundation\Request;
 
-class JsonRequestListingConverterTest extends TestCase
+final class JsonRequestListingConverterTest extends TestCase
 {
     public function testConvert_WithCorrectParams_WillReturnListing()
     {

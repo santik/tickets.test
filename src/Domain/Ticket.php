@@ -51,7 +51,7 @@ final class Ticket implements JsonSerializable
         return $this->id;
     }
 
-    public function toArray()
+    public function toArray(): array
     {
         return [
             'id' => $this->id(),
@@ -59,7 +59,7 @@ final class Ticket implements JsonSerializable
         ];
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return $this->toArray();
     }
