@@ -9,7 +9,7 @@ interface ListingRepository
 {
     public function createListing(Listing $listing, User $owner): Listing;
 
-    public function isBarcodeSaleable(string $barcode): bool;
+    public function isBarcodeSaleable(string $barcode, int $sellerId): bool;
 
     /**
      * @return Listing[]

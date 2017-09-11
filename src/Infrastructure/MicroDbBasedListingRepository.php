@@ -78,7 +78,7 @@ final class MicroDbBasedListingRepository implements ListingRepository
         ]);
     }
 
-    public function isBarcodeSaleable(string $barcode): bool
+    public function isBarcodeSaleable(string $barcode, int $sellerId): bool
     {
         $data = [
             'type' => 'barcode',
@@ -97,12 +97,12 @@ final class MicroDbBasedListingRepository implements ListingRepository
             return true;
         }
 
-        return $ticket['type'] == 'ticket' && $this->isTicketSold($ticket);
+        return $ticket['type'] == 'ticket' && $this->isTicketSoldToSeller($ticket, $sellerId);
     }
 
-    private function isTicketSold(array $ticket): bool
+    private function isTicketSoldToSeller(array $ticket, int $sellerId): bool
     {
-        return isset($ticket['boughtAtDate']) && $ticket['boughtAtDate'] != null;
+        return isset($ticket['boughtByUserId']) && $ticket['boughtByUserId'] == $sellerId;
     }
 
     /**

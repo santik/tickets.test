@@ -11,6 +11,7 @@ use Santik\Tickets\Domain\Exception\BarcodesAreNotUnique;
 use Santik\Tickets\Domain\Listing;
 use Santik\Tickets\Domain\Repository\ListingRepository;
 use Santik\Tickets\Domain\Ticket;
+use Santik\Tickets\Domain\User;
 
 final class ListingValidatorTest extends TestCase
 {
@@ -41,15 +42,20 @@ final class ListingValidatorTest extends TestCase
 
         $listing = Listing::createFromArray($data);
 
+        $user = User::createFromArray(['id' => 123, 'name' => 'somename']);
+
         $this->expectException(BarcodesAreNotUnique::class);
 
-        $validator->validate($listing);
+        $validator->validate($listing, $user);
     }
 
     public function testValidate_BarcodesAreNotUniqueInDb_WillThrowException()
     {
+        $id = 123;
+        $user = User::createFromArray(['id' => $id, 'name' => 'somename']);
+
         $repository = $this->prophesize(ListingRepository::class);
-        $repository->isBarcodeSaleable('barcode1')->willReturn(false);
+        $repository->isBarcodeSaleable('barcode1', $id)->willReturn(false);
 
         $validator = new ListingValidator($repository->reveal());
 
@@ -69,8 +75,9 @@ final class ListingValidatorTest extends TestCase
 
         $listing = Listing::createFromArray($data);
 
+
         $this->expectException(BarcodeIsListed::class);
 
-        $validator->validate($listing);
+        $validator->validate($listing, $user);
     }
 }

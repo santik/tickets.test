@@ -23,7 +23,7 @@ final class ListingService
 
     public function create(Listing $listing, User $owner): Listing
     {
-        $this->listingValidator->validate($listing);
+        $this->listingValidator->validate($listing, $owner);
         return $this->listingRepository->createListing($listing, $owner);
     }
 

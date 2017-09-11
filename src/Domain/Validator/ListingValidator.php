@@ -8,6 +8,7 @@ use Santik\Tickets\Domain\Exception\BarcodeIsListed;
 use Santik\Tickets\Domain\Exception\BarcodesAreNotUnique;
 use Santik\Tickets\Domain\Listing;
 use Santik\Tickets\Domain\Repository\ListingRepository;
+use Santik\Tickets\Domain\User;
 
 class ListingValidator
 {
@@ -19,11 +20,11 @@ class ListingValidator
         $this->listingRepository = $listingRepository;
     }
 
-    public function validate(Listing $listing)
+    public function validate(Listing $listing, User $seller)
     {
         $this->validateBarcodesAreUnique($listing);
 
-        $this->validateBarcodesAreSaleable($listing);
+        $this->validateBarcodesAreSaleable($listing, $seller->id());
     }
 
     private function validateBarcodesAreUnique(Listing $listing)
@@ -45,12 +46,12 @@ class ListingValidator
         return $barcodes;
     }
 
-    private function validateBarcodesAreSaleable($listing)
+    private function validateBarcodesAreSaleable($listing, $sellerId)
     {
         $barcodes = $this->extractBarcodes($listing);
 
         foreach ($barcodes as $barcode) {
-            if (!$this->listingRepository->isBarcodeSaleable($barcode)) {
+            if (!$this->listingRepository->isBarcodeSaleable($barcode, $sellerId)) {
                 throw new BarcodeIsListed();
             }
         }
